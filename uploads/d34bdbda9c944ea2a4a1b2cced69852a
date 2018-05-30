@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int main(){
+	int t;cin>>t;
+	while(t--){
+		string s;int k;int res=0;
+		cin>>s>>k;
+		int ary[s.length()][26]={};
+		ary[0][s.at(0)-97]++;
+		for(int i=1;i<s.length();i++){
+			for(int z=0;z<26;z++){
+				ary[i][z]=ary[i-1][z];
+			}
+			ary[i][s.at(i)-97]++;
+		}
+		for(int i=0;i<s.length()-k+1;i++){
+			for(int j=i+1;j<s.length();j++){
+				int ck;vector <int> vec;
+				for(int z=0;z<26;z++){
+					if(i!=0)
+					ck=ary[j][z]-ary[i-1][z];
+					else
+					ck=ary[j][z];
+					if(ck!=0){
+						vec.push_back(ck);
+					}
+				}
+				int zz=0;
+				for(zz;zz<vec.size();zz++){
+					if(vec[0]!=vec[zz]) break;
+				}
+			if(zz==vec.size()&&zz>=k) res++;
+			}
+		}
+		cout<<res<<endl;
+	}
+}
