@@ -18,7 +18,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 app.post('/upload',upload.single('file'),(req,res)=>{
-  res.json({size:req.file.size})
+ res.json({name:req.file.originalname,type:req.file.mimetype,size:req.file.size})
 })
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
